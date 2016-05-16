@@ -23,7 +23,7 @@ All commands follow a certain scheme: `go-manager <command> [<flags>] [<argument
 ### Installing Go
 ```
 # installs the latest available version
-go-manager install
+go-manager install latest
 
 # installs version 1.6.2
 go-manager install 1.6.2

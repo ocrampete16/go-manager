@@ -4,7 +4,7 @@ A minimalist approach to managing multiple Go installations. Inspired by chruby 
 Usage: go-manager <command> [<flags>] [<arguments>]
 
 Commands:
-  install                 - install the latest available version
+  install latest          - install the latest available version
   install <version>       - install a specific version
 
   list installed          - list all Go versions installed on your computer
