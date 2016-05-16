@@ -32,12 +32,21 @@ function _go_manager_list()
 
 function _go_manager_use()
 {
-  echo "Using..."
+  if [[ $1 == "--default" ]]; then
+    echo $2 > $HOME/.go-version
+    export GOROOT=$HOME/.go-manager/gos/$2
+    export PATH=$PATH:$GOROOT/bin
+    export GOPATH=$HOME/.go-manager/workspaces/$2
+  else
+    export GOROOT=$HOME/.go-manager/gos/$1
+    export PATH=$PATH:$GOROOT/bin
+    export GOPATH=$HOME/.go-manager/workspaces/$1
+  fi
 }
 
 function _go_manager_uninstall()
 {
-  echo "Uninstalling..."
+  rm -rf $HOME/.go-manager/gos/$1
 }
 
 function go-manager()
