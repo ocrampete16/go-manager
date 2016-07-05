@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-readonly GO_MANAGER_DIR="$(cd "$(dirname "$0")" && pwd)"
-readonly HELP_TEXT="Go Manager
+GO_MANAGER_DIR="$(cd "$(dirname "$0")" && pwd)"
+HELP_TEXT="Go Manager
 A minimalist approach to managing multiple Go installations. Inspired by chruby and ruby-install.
 
 Usage: go-manager <command> [<flags>] [<arguments>]
