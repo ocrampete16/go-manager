@@ -10,6 +10,9 @@ Everything else.
 
 There are no new concepts to learn. No pkgsets, environments, none of that.
 
+## What isn't done yet
+* automatically load the Go version saved in `.go-version`, if such a file exists.
+
 ## Installation
 ```
 git clone https://github.com/ocrampete16/go-manager.git ~/.go-manager
