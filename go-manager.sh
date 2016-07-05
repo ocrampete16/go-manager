@@ -1,5 +1,7 @@
-GO_MANAGER_DIR="$(cd "$(dirname $0)" && pwd)"
-HELP_TEXT="Go Manager
+#!/usr/bin/env bash
+
+readonly GO_MANAGER_DIR="$(cd "$(dirname "$0")" && pwd)"
+readonly HELP_TEXT="Go Manager
 A minimalist approach to managing multiple Go installations. Inspired by chruby and ruby-install.
 
 Usage: go-manager <command> [<flags>] [<arguments>]
@@ -33,7 +35,7 @@ install_go_version() {
     )"
   fi
 
-  local installation_dir=$GO_MANAGER_DIR/gos/$version
+  local installation_dir="$GO_MANAGER_DIR/gos/$version"
 
   if [[ "$(uname)" == "Darwin" ]]; then
     local operating_system="darwin"
@@ -51,9 +53,9 @@ install_go_version() {
 
   local archive_url="https://storage.googleapis.com/golang/go$version.$operating_system-$bit_architecture.$file_extension"
 
-  mkdir $installation_dir
-  wget --output-document=- $archive_url \
-    | tar --gzip --extract --file=- --directory=$installation_dir --strip-components=1
+  mkdir "$installation_dir"
+  wget --output-document=- "$archive_url" \
+    | tar --gzip --extract --file=- --directory="$installation_dir" --strip-components=1
 }
 
 list_available_go_versions() {
@@ -67,7 +69,7 @@ list_available_go_versions() {
 
 list_installed_go_versions() {
   echo "Installed Go versions:"
-  find $GO_MANAGER_DIR/gos -mindepth 1 -maxdepth 1 -type d \
+  find "$GO_MANAGER_DIR/gos" -mindepth 1 -maxdepth 1 -type d \
     | awk -F '/' '{ print $NF }' \
     | awk '{ print "  " $0 }'
 }
@@ -80,12 +82,12 @@ use_go_version() {
 
 make_go_version_default() {
   local version="$1"
-  echo $version > $HOME/.go-version
+  echo "$version" > "$HOME/.go-version"
 }
 
 uninstall_go_version() {
   local version="$1"
-  rm -rf $GO_MANAGER_DIR/gos/$version
+  rm -rf "$GO_MANAGER_DIR/gos/$version"
   unset GOROOT
 }
 
@@ -95,7 +97,7 @@ go-manager() {
   case $command in
     "install")
       local version="$2"
-      install_go_version $version
+      install_go_version "$version"
       ;;
     "list")
       if [[ "$2" == "available" ]]; then
@@ -113,18 +115,18 @@ go-manager() {
         local version="$2"
       fi
 
-      use_go_version $version
+      use_go_version "$version"
 
       if [[ "$make_default_version" == true ]]; then
-        make-go-version-default $version
+        make-go-version-default "$version"
       fi
       ;;
     "uninstall")
       local version="$2"
-      uninstall_go_version $version
+      uninstall_go_version "$version"
       ;;
     *)
-      echo $HELP_TEXT
+      echo "$HELP_TEXT"
       ;;
   esac
 }
